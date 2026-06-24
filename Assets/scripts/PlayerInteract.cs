@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-     public float interactDistance = 5f;
+    public float interactDistance = 5f;
     public playersit playerSit;
 
     void Update()
     {
+        // 1. Unsit Logic (ESC Key)
+        if (Input.GetKeyDown(KeyCode.Escape) && !KeypadInteract.keypadOpen)
+            {
+                if (playerSit.IsSitting())
+                {
+                    playerSit.ToggleSit();
+                }
+            }
+        // 2. Interact Logic (E Key)
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // If sitting, E = stand up
-            if (playerSit.IsSitting())
+            // Only allow interaction if the player is NOT sitting
+            if (!playerSit.IsSitting())
             {
-                playerSit.ToggleSit();
-                return;
+                TryInteract();
             }
-
-            // Otherwise, interact normally
-            TryInteract();
         }
     }
 
     void TryInteract()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
         int mask = ~LayerMask.GetMask("Player");
 
         if (Physics.Raycast(ray, out hit, interactDistance, mask))
         {
+            Debug.Log("Hit: " + hit.collider.name);
             hit.collider.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
         }
     }
-    }
+}
