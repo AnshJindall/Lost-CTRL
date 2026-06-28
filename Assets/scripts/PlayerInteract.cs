@@ -6,11 +6,15 @@ public class PlayerInteract : MonoBehaviour
 {
     public float interactDistance = 5f;
     public playersit playerSit;
+    public KeypadInteract keypadInteract;
+    public SafeInteract safeInteract;
 
     void Update()
     {
         // 1. Unsit Logic (ESC Key)
-        if (Input.GetKeyDown(KeyCode.Escape) && !KeypadInteract.keypadOpen)
+        if (Input.GetKeyDown(KeyCode.Escape)
+    && !keypadInteract.keypadUI.activeSelf
+    && !safeInteract.safeUI.activeSelf)
             {
                 if (playerSit.IsSitting())
                 {

@@ -15,11 +15,9 @@ public class EnemyController2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
 {
-    Debug.Log("Hit: " + other.name);
 
     if (other.CompareTag("TurnPoint") && canTurn)
     {
-        Debug.Log("TURN");
         direction *= -1;
         StartCoroutine(TurnCooldown());
     }

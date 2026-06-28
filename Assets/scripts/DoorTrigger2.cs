@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoorTrigger2 : MonoBehaviour
 {
-    public GameObject ePrompt;
+    
     private bool playerNearby;
     public Transform room2Spawn;
     public Transform dungeonRoot;
@@ -24,7 +24,7 @@ public class DoorTrigger2 : MonoBehaviour
         if (other.CompareTag("Player"))
         {   
             playerNearby = true;
-            ePrompt.SetActive(true);
+            PromptManager.Instance.ShowE();
         }
     }
 
@@ -33,7 +33,10 @@ public class DoorTrigger2 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = false;
-            ePrompt.SetActive(false);
-        }
+            Invoke(nameof(HidePrompt), 0.02f);       }
     }
+    void HidePrompt()
+{
+    PromptManager.Instance.Hide();
+}
 }
