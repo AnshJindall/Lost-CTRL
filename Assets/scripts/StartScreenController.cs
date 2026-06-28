@@ -15,6 +15,7 @@ public class StartScreenController : MonoBehaviour
     public Color redFlash = new Color(0.45f, 0.02f, 0.02f, 1f);
     
     public Player2DMovement playerMovement;
+    public playersit playerSit;
 
     private bool gameStarted = false;
 
@@ -63,7 +64,7 @@ public class StartScreenController : MonoBehaviour
     if (gameStarted)
         return;
 
-    if (Input.GetKeyDown(KeyCode.Return))
+    if (playerSit.isSitting && Input.GetKeyDown(KeyCode.Return))
     {
         gameStarted = true;
 

@@ -7,7 +7,7 @@ public class playersit : MonoBehaviour
     public Transform sitPoint;
     public float sitSpeed = 5f;
 
-    private bool isSitting = false;
+    public bool isSitting = false;
     private bool isMoving = false;
 
     private Vector3 standPos;
