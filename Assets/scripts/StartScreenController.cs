@@ -21,6 +21,8 @@ public class StartScreenController : MonoBehaviour
 
     private string normalTitle = "TESTGAME1.EXE";
 
+    public BossIntroController bossIntro;
+
     private string[] glitches =
     {
     "TESTGAM_1.EXE",
@@ -66,21 +68,14 @@ public class StartScreenController : MonoBehaviour
 
     if (playerSit.isSitting && Input.GetKeyDown(KeyCode.Return))
     {
-        gameStarted = true;
-
-        StopAllCoroutines();
-
         pressEnterText.enabled = false;
-
         titleText.enabled = false;
-
         blueScreen.enabled = false;
 
-        playerMovement.enabled = true;
+        // Start boss intro instead of gameplay
+        bossIntro.StartBossIntro();
 
-        // TODO: Start Game BGM
-
-        Debug.Log("Game Started");
+        Debug.Log("Boss Intro Started");
     }
 }
     //------------------------------------------------
